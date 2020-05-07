@@ -8,7 +8,8 @@
   <div class="buttons" v-for="(row,index) in numbers" >
     <button 
       v-for="(number,index2) in row" 
-      :id="['button' + index + '-' + index2]" >
+      :id="['button' + index + '-' + index2]" 
+      @click = 'addDips(number)'>
       {{ number }}
     </button>
   </div>
@@ -24,6 +25,15 @@
       ["0", "="]
       ],
       display: "0"
+    },
+    mutations: {
+      addDips(state,payload){
+        if(state.display ===0){
+          state.display = payload
+        } else {
+          state.display += payload
+        }
+      }
     }
   })
 
@@ -31,6 +41,11 @@
   new Vue({
     store,
     el: "#app",
-    computed: mapState(['numbers', 'display'])
+    computed: mapState(['numbers', 'display']),
+    methods: {
+      addDips(number){
+        this.$store.commit("addDips",number)
+      }
+    }
   })
 </script>
