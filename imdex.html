@@ -28,7 +28,11 @@
     },
     mutations: {
       addDips(state,payload){
-        if(state.display ===0){
+        if(payload === "=") {
+            state.display = eval(state.display)
+          return
+        }
+        if(state.display === "0"){
           state.display = payload
         } else {
           state.display += payload
